@@ -22,7 +22,7 @@ export default function ChatMessage({
         src={photoUrl}
         alt="profile image"
         referrerPolicy="no-referrer"
-        onClick={() => setMiniMenuOpened((prev) => !prev)}
+        onClick={() => fromCurrentUser && setMiniMenuOpened((prev) => !prev)}
       />
       <p>{value}</p>
       {miniMenuOpened && (
