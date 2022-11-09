@@ -1,0 +1,193 @@
+:root {
+  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 400;
+  --main-background: #242629;
+  --main-highlight: #7f5af0;
+  --secondary-highlight: #2cb67d;
+  --main-text-color: #fffffe;
+  --dark-highlight: #010101;
+}
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  color: white;
+}
+@mixin center-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin btn-hover {
+  transition: transform 0.3s;
+  &:hover {
+    background-color: var(--main-highlight);
+    transform: scale(1.05);
+    color: white;
+  }
+}
+.content-wrapper {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+.signIn-page {
+  @include center-flex;
+  background-color: var(--main-background);
+  width: 100%;
+  height: 100%;
+}
+.signIn-btn {
+  padding: 1rem;
+  font-size: 2rem;
+  background-color: var(--main-background);
+  color: white;
+  border: 2px solid black;
+  border-radius: 15px;
+  letter-spacing: 2px;
+  transition: transform 0.5s;
+
+  &:hover {
+    background-color: var(--main-highlight);
+    transform: scale(1.05);
+  }
+}
+
+// top level of chatroom
+.chatRoom {
+  background-color: var(--main-background);
+  height: 100vh;
+  max-width: 500px;
+  margin: auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+
+  //navbar styles
+  .navbar {
+    justify-self: flex-start;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--dark-highlight);
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    .signOut-btn {
+      padding: 0.5rem;
+      font-size: 1rem;
+      background-color: rgba(128, 128, 128, 0.349);
+      color: white;
+      border: 2px solid black;
+      border-radius: 15px;
+      letter-spacing: 2px;
+      @include btn-hover;
+    }
+  }
+
+  // messages styles
+  .messages-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-grow: 1;
+    width: 100%;
+    overflow: hidden;
+
+    .chat-message {
+      width: 100%;
+      display: flex;
+      gap: 1rem;
+      padding: 0.5rem;
+      justify-content: flex-start;
+      position: relative;
+
+      p {
+        padding: 0.5rem;
+        border-radius: 10px;
+      }
+      img {
+        width: 40px;
+        border-radius: 50%;
+      }
+      .mini-menu {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        button {
+          font-size: 1rem;
+          padding: 0.3rem;
+          // border-radius: 10px;
+          border: none;
+          transition: all 0.3s;
+          color: red;
+
+          &:hover {
+            scale: 1.1;
+            background-color: red;
+            color: white;
+          }
+        }
+      }
+    }
+    .sent {
+      flex-direction: row-reverse;
+
+      p {
+        background-color: var(--main-highlight);
+      }
+    }
+    .recieved {
+      p {
+        background-color: var(--main-text-color);
+        color: var(--dark-highlight);
+      }
+    }
+  }
+
+  // message form styles
+  .message-form {
+    width: 100%;
+    // position: absolute;
+    // bottom: 0;
+    display: flex;
+    justify-self: flex-end;
+    justify-content: space-around;
+    padding: 1rem;
+
+    .message-form-input {
+      color: var(--main-text-color);
+      padding: 0.5rem;
+      background-color: var(--dark-highlight);
+      border: none;
+      font-size: 1.3rem;
+      width: 80%;
+      border-radius: 10px;
+    }
+
+    .message-form-sbmt-btn {
+      // padding: 0.5rem;
+      @include center-flex;
+      background-color: white;
+      border: none;
+      font-size: 1.3rem;
+      width: 10%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      @include btn-hover;
+      .send-icon {
+        color: white;
+      }
+    }
+  }
+}
