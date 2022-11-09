@@ -50,7 +50,7 @@ export default function ChatRoom({ signOut, firestore, auth }) {
   return (
     <section className="chatRoom">
       <nav className="navbar">
-        <h1>🔥</h1>
+        <h1>🔥 💬</h1>
         <button onClick={signOut} className="signOut-btn">
           Sign Out
         </button>
