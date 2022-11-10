@@ -8,13 +8,17 @@ import {
   getDocs,
   addDoc,
 } from "firebase/firestore";
+
+import { firestore, auth } from "../Firebase";
 import ChatMessage from "./ChatMessage";
 import { GrSend } from "react-icons/gr";
 
-export default function ChatRoom({ signOut, firestore, auth }) {
+export default function ChatRoom({ signOut }) {
   const messagesRef = collection(firestore, "messages");
   const [allMessages, setAllMessages] = useState([]);
   const currentMessage = useRef("");
+  const scrollTo = useRef();
+  const scrollToForm = useRef();
 
   async function addNewMessage(e) {
     e.preventDefault();
@@ -25,16 +29,15 @@ export default function ChatRoom({ signOut, firestore, auth }) {
       photoUrl: auth.currentUser.photoURL,
     });
     currentMessage.current.value = "";
+    scrollTo.current.scrollIntoView({ behavior: "smooth" });
   }
   useEffect(() => {
     let cancelSnapshot;
+    let messagesQuery;
+
+    scrollToForm.current.scrollIntoView({ behavior: "smooth" });
     async function queryMessages() {
-      const messagesQuery = query(messagesRef, orderBy("createdAt"), limit(25));
-      // const querySnapshot = await getDocs(messagesQuery);
-      // const allDocs = querySnapshot.docs;
-      // allDocs.forEach((message) => {
-      //   console.log(`Document ${message.id} Data: ${message.data().value}`);
-      // });
+      messagesQuery = query(messagesRef, orderBy("createdAt"), limit(25));
       cancelSnapshot = onSnapshot(messagesQuery, (querySnapshot) => {
         setAllMessages(
           querySnapshot.docs.map((e) => {
@@ -44,14 +47,14 @@ export default function ChatRoom({ signOut, firestore, auth }) {
       });
     }
     queryMessages();
+    return cancelSnapshot;
   }, []);
 
-  console.log(currentMessage.current.value);
   return (
     <section className="chatRoom">
       <nav className="navbar">
         <h1>🔥 💬</h1>
-        <button onClick={signOut} className="signOut-btn">
+        <button onClick={() => auth.signOut()} className="signOut-btn">
           Sign Out
         </button>
       </nav>
@@ -68,8 +71,13 @@ export default function ChatRoom({ signOut, firestore, auth }) {
             />
           );
         })}
+        <div ref={scrollTo}></div>
       </div>
-      <form className="message-form" onSubmit={addNewMessage}>
+      <form
+        className="message-form"
+        onSubmit={addNewMessage}
+        ref={scrollToForm}
+      >
         <input
           type="text"
           className="message-form-input"

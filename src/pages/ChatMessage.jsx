@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { doc, deleteDoc } from "firebase/firestore";
 
-export default function ChatMessage({
-  message,
-  fromCurrentUser,
-  firestore,
-  messageId,
-}) {
+import { firestore, auth } from "../Firebase";
+
+export default function ChatMessage({ message, fromCurrentUser, messageId }) {
   const { value, photoUrl } = message;
   const [miniMenuOpened, setMiniMenuOpened] = useState(false);
   let messageStatus = "chat-message ";
