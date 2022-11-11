@@ -27,7 +27,7 @@ export default function SignUp() {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         const user = result.user;
-        navigate("/");
+        navigate("/displayname");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -53,7 +53,7 @@ export default function SignUp() {
 
     try {
       await signup(auth, email, password);
-      navigate("/");
+      navigate("/displayname");
     } catch (error) {
       setError("Failed to Create an Account");
       console.log(error);
@@ -82,7 +82,7 @@ export default function SignUp() {
             Create New Account
           </button>
         </form>
-        <button onClick={signInWithGoogle} className="signIn-btn">
+        <button onClick={signInWithGoogle} className="google-btn">
           Sign In with Google
         </button>
         {error && <p>{error}</p>}

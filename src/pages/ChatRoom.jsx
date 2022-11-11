@@ -27,6 +27,7 @@ export default function ChatRoom({ signOut }) {
       createdAt: new Date(),
       userId: auth.currentUser.uid,
       photoUrl: auth.currentUser.photoURL,
+      displayName: auth.currentUser.displayName,
     });
     currentMessage.current.value = "";
     scrollTo.current.scrollIntoView({ behavior: "smooth" });

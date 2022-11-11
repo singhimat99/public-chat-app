@@ -28,6 +28,57 @@
     color: white;
   }
 }
+
+@mixin form-styles {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 500px;
+  background-color: var(--main-background);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  padding-top: 2rem;
+  border-radius: 10px;
+  h2 {
+    font-size: 2rem;
+  }
+  p {
+    color: red;
+  }
+  form {
+    margin: 1rem;
+    margin-bottom: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    input {
+      background-color: transparent;
+      border: none;
+      font-size: 1.2rem;
+      margin: 0.5rem;
+      border-bottom: 1.5px solid #fffffe;
+      padding: 0.3rem;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.557);
+      }
+    }
+    button {
+      width: 100%;
+      background: none;
+      border: 2px solid black;
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      padding: 0.5rem;
+
+      @include btn-hover;
+    }
+  }
+}
 .content-wrapper {
   width: 100vw;
   height: 100vh;
@@ -42,52 +93,7 @@
   flex-direction: column;
 
   .log-in-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 500px;
-    background-color: var(--main-background);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1.5rem;
-    padding-top: 2rem;
-    border-radius: 10px;
-
-    h2 {
-      font-size: 2rem;
-    }
-
-    .login-form {
-      margin: 1rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-
-      input {
-        background-color: transparent;
-        border: none;
-        font-size: 1.2rem;
-        margin: 0.5rem;
-        border-bottom: 1.5px solid #fffffe;
-        padding: 0.3rem;
-
-        &::placeholder {
-          color: rgba(255, 255, 255, 0.557);
-        }
-      }
-      button {
-        width: 100%;
-        background: none;
-        border: 2px solid black;
-        font-size: 1.2rem;
-        margin-top: 1rem;
-        padding: 0.5rem;
-
-        @include btn-hover;
-      }
-    }
+    @include form-styles;
   }
 }
 
@@ -98,71 +104,31 @@
   background-color: var(--dark-highlight);
 
   .sign-up {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 500px;
-    background-color: var(--main-background);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1.5rem;
-    padding-top: 2rem;
-    border-radius: 10px;
+    @include form-styles;
 
-    h2 {
-      font-size: 2rem;
-    }
-    p {
-      color: red;
-    }
-    .sign-up-form {
-      margin: 1rem;
-      margin-bottom: 0.3rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-
-      input {
-        background-color: transparent;
-        border: none;
-        font-size: 1.2rem;
-        margin: 0.5rem;
-        border-bottom: 1.5px solid #fffffe;
-        padding: 0.3rem;
-
-        &::placeholder {
-          color: rgba(255, 255, 255, 0.557);
-        }
-      }
-      button {
-        width: 100%;
-        background: none;
-        border: 2px solid black;
-        font-size: 1.2rem;
-        margin-top: 1rem;
-        padding: 0.5rem;
-
-        @include btn-hover;
-      }
-    }
-    .signIn-btn {
+    .google-btn {
       background: none;
       border: none;
-      font-size: 0.75rem;
-      padding: 0.5rem;
-      margin: 0;
       transition: all 0.3s;
+      margin: 1rem;
 
       &:hover {
-        text-decoration: underline;
+        border-bottom: 2px solid #fffffe;
         transform: scale(1.1);
       }
     }
   }
 }
+.displayname-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: var(--dark-highlight);
 
+  .displayname-form-container {
+    @include form-styles;
+  }
+}
 // top level of chatroom
 .chatRoom {
   background-color: var(--main-background);
@@ -218,9 +184,13 @@
       justify-content: flex-start;
       position: relative;
 
-      p {
+      .message-content {
         padding: 0.5rem;
         border-radius: 10px;
+
+        h5 {
+          font-weight: bold;
+        }
       }
       img {
         width: 40px;
@@ -235,7 +205,6 @@
         button {
           font-size: 1rem;
           padding: 0.3rem;
-          // border-radius: 10px;
           border: none;
           transition: all 0.3s;
           color: red;
@@ -251,14 +220,16 @@
     .sent {
       flex-direction: row-reverse;
 
-      p {
+      .message-content {
         background-color: var(--main-highlight);
       }
     }
     .recieved {
-      p {
+      .message-content {
         background-color: var(--main-text-color);
-        color: var(--dark-highlight);
+        p {
+          color: var(--dark-highlight);
+        }
       }
     }
   }

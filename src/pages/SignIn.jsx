@@ -25,7 +25,7 @@ export default function SignIn() {
     try {
       const response = await login(auth, email, password);
       const user = response.user;
-      navigate("/");
+      navigate("/displayname");
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
