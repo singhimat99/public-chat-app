@@ -94,6 +94,20 @@
 
   .log-in-container {
     @include form-styles;
+    .anonSignIn {
+      button {
+        border: none;
+        background: none;
+        transition: all 0.3s;
+        font-family: inherit;
+        font-size: inherit;
+
+        &:hover {
+          border-bottom: 2px solid #fffffe;
+          transform: scale(1.05);
+        }
+      }
+    }
   }
 }
 
@@ -194,6 +208,7 @@
       }
       img {
         width: 40px;
+        object-fit: cover;
         border-radius: 50%;
       }
       .mini-menu {

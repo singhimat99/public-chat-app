@@ -13,7 +13,7 @@ import { useAuth } from "../contexts/AuthContext";
 export default function SignIn() {
   const passwordRef = useRef();
   const emailRef = useRef();
-  const { login } = useAuth();
+  const { login, anonLogin } = useAuth();
   const navigate = useNavigate();
 
   async function handleLogin(e) {
@@ -31,12 +31,23 @@ export default function SignIn() {
       const errorMessage = error.message;
     }
   }
+  async function handleAnonSignIn(e) {
+    e.preventDefault();
+    try {
+      const response = await anonLogin(auth);
+      const user = response.user;
+      navigate("/displayname");
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    }
+  }
   return (
     <div className="signIn-page">
       <div className="log-in-container">
         <h2>Log In</h2>
         <form onSubmit={handleLogin} className="login-form">
-          <input type="email" ref={emailRef} placeholder="Email" />
+          <input type="email" ref={emailRef} required placeholder="Email" />
           <input
             type="password"
             ref={passwordRef}
@@ -48,6 +59,10 @@ export default function SignIn() {
 
         <div className="needs-account">
           Click here to <Link to="/signup">Sign Up</Link>
+        </div>
+        <span>Or</span>
+        <div className="anonSignIn">
+          Sign in <button onClick={handleAnonSignIn}>Anonymously</button>
         </div>
       </div>
     </div>

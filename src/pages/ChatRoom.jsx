@@ -12,6 +12,7 @@ import {
 import { firestore, auth } from "../Firebase";
 import ChatMessage from "./ChatMessage";
 import { GrSend } from "react-icons/gr";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function ChatRoom({ signOut }) {
   const messagesRef = collection(firestore, "messages");
@@ -19,6 +20,7 @@ export default function ChatRoom({ signOut }) {
   const currentMessage = useRef("");
   const scrollTo = useRef();
   const scrollToForm = useRef();
+  const { currentUser } = useAuth();
 
   async function addNewMessage(e) {
     e.preventDefault();
@@ -55,6 +57,7 @@ export default function ChatRoom({ signOut }) {
     <section className="chatRoom">
       <nav className="navbar">
         <h1>🔥 💬</h1>
+        <h1>{currentUser.displayName}</h1>
         <button onClick={() => auth.signOut()} className="signOut-btn">
           Sign Out
         </button>

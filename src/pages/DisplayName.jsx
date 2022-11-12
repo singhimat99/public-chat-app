@@ -7,7 +7,6 @@ export default function DisplayName() {
   const { currentUser } = useAuth();
   const usernameRef = useRef();
   const navigate = useNavigate();
-  console.log(currentUser);
   async function handleSubmit(e) {
     e.preventDefault();
     const username = usernameRef.current.value;
@@ -24,7 +23,12 @@ export default function DisplayName() {
     <div className="displayname-container">
       <div className="displayname-form-container">
         <form onSubmit={handleSubmit}>
-          <input type="text" placeholder="Enter Your Name" ref={usernameRef} />
+          <input
+            type="text"
+            placeholder="Enter Your Name"
+            required
+            ref={usernameRef}
+          />
           <button type="submit">Submit</button>
         </form>
       </div>
