@@ -21,6 +21,7 @@ export default function ChatRoom({ signOut }) {
   const scrollTo = useRef();
   const scrollToForm = useRef();
   const { currentUser } = useAuth();
+  console.log(allMessages);
 
   async function addNewMessage(e) {
     e.preventDefault();
@@ -34,13 +35,13 @@ export default function ChatRoom({ signOut }) {
     currentMessage.current.value = "";
     scrollTo.current.scrollIntoView({ behavior: "smooth" });
   }
+  let cancelSnapshot;
   useEffect(() => {
-    let cancelSnapshot;
     let messagesQuery;
 
     scrollToForm.current.scrollIntoView({ behavior: "smooth" });
     async function queryMessages() {
-      messagesQuery = query(messagesRef, orderBy("createdAt"), limit(25));
+      messagesQuery = query(messagesRef, orderBy("createdAt"), limit(100));
       cancelSnapshot = onSnapshot(messagesQuery, (querySnapshot) => {
         setAllMessages(
           querySnapshot.docs.map((e) => {
@@ -52,7 +53,7 @@ export default function ChatRoom({ signOut }) {
     queryMessages();
     return cancelSnapshot;
   }, []);
-
+  console.log(cancelSnapshot);
   return (
     <section className="chatRoom">
       <nav className="navbar">
@@ -86,6 +87,7 @@ export default function ChatRoom({ signOut }) {
           type="text"
           className="message-form-input"
           ref={currentMessage}
+          required
           placeholder="Type Here..."
         />
         <button type="submit" className="message-form-sbmt-btn">

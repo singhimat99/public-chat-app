@@ -200,10 +200,11 @@
 
       .message-content {
         padding: 0.5rem;
+        max-width: 80%;
         border-radius: 10px;
 
-        h5 {
-          font-weight: bold;
+        p {
+          word-wrap: break-word;
         }
       }
       img {
@@ -240,12 +241,18 @@
       .message-content {
         background-color: var(--main-highlight);
       }
+      h5 {
+        color: white;
+      }
     }
     .recieved {
       .message-content {
         background-color: var(--main-text-color);
         p {
           color: var(--dark-highlight);
+        }
+        h5 {
+          color: black;
         }
       }
     }
@@ -254,8 +261,9 @@
   // message form styles
   .message-form {
     width: 100%;
-    // position: absolute;
-    // bottom: 0;
+    min-height: 10vh;
+    position: fixed;
+    bottom: 0;
     display: flex;
     justify-self: flex-end;
     justify-content: space-around;
@@ -263,6 +271,7 @@
 
     .message-form-input {
       color: var(--main-text-color);
+      height: 100%;
       padding: 0.5rem;
       background-color: var(--dark-highlight);
       border: none;
