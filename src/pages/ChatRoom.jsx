@@ -33,7 +33,6 @@ export default function ChatRoom({ signOut }) {
       displayName: auth.currentUser.displayName,
     });
     currentMessage.current.value = "";
-    scrollTo.current.scrollIntoView({ behavior: "smooth" });
   }
   let cancelSnapshot;
   useEffect(() => {
@@ -50,6 +49,7 @@ export default function ChatRoom({ signOut }) {
         );
       });
     }
+    scrollTo.current.scrollIntoView({ behavior: "smooth" });
     queryMessages();
     return cancelSnapshot;
   }, []);

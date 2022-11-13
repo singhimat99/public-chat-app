@@ -162,6 +162,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    max-width: 500px;
     position: fixed;
     top: 0;
     z-index: 99;
@@ -273,6 +274,7 @@
     position: fixed;
     bottom: 0;
     z-index: 99;
+    max-width: 500px;
     display: flex;
     justify-self: flex-end;
     justify-content: space-around;
