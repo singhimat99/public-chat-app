@@ -82,6 +82,7 @@
 .content-wrapper {
   width: 100vw;
   height: 100vh;
+  background-color: grey;
   position: relative;
 }
 .signIn-page {
@@ -158,10 +159,13 @@
   //navbar styles
   .navbar {
     justify-self: flex-start;
+    position: fixed;
+    top: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    max-width: 500px;
     padding: 1rem;
     background-color: var(--dark-highlight);
 
@@ -170,7 +174,7 @@
     }
 
     .signOut-btn {
-      padding: 0.5rem;
+      padding: 0.7rem;
       font-size: 1rem;
       background-color: rgba(128, 128, 128, 0.349);
       color: white;
@@ -261,18 +265,20 @@
   // message form styles
   .message-form {
     width: 100%;
+    max-width: 500px;
     min-height: 10vh;
     position: fixed;
     bottom: 0;
     display: flex;
     justify-self: flex-end;
     justify-content: space-around;
-    padding: 1rem;
+    align-items: center;
+    padding: 0.5rem;
 
     .message-form-input {
       color: var(--main-text-color);
       height: 100%;
-      padding: 0.5rem;
+      padding: 1rem;
       background-color: var(--dark-highlight);
       border: none;
       font-size: 1.3rem;
@@ -286,7 +292,7 @@
       background-color: white;
       border: none;
       font-size: 1.3rem;
-      width: 10%;
+      width: 12%;
       aspect-ratio: 1;
       border-radius: 50%;
       @include btn-hover;
