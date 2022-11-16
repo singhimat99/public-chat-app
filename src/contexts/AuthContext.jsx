@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 
 import {
   createUserWithEmailAndPassword,
+  deleteUser,
   onAuthStateChanged,
   signInAnonymously,
   signInWithEmailAndPassword,
@@ -27,6 +28,11 @@ export function AuthProvider({ children }) {
   function anonLogin(auth) {
     return signInAnonymously(auth);
   }
+  function signOut() {
+    let isAnon = currentUser.isAnonymous;
+    auth.signOut();
+    isAnon && deleteUser(currentUser);
+  }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -45,6 +51,7 @@ export function AuthProvider({ children }) {
     signup,
     login,
     anonLogin,
+    signOut,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }

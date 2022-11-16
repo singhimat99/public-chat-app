@@ -1,5 +1,5 @@
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Raleway", sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;
@@ -169,17 +169,35 @@
     padding: 1rem;
     background-color: var(--dark-highlight);
 
+    p {
+      font-size: 1.8rem;
+    }
     h1 {
-      font-size: 2rem;
+      font-size: 1.6rem;
+    }
+    @media (max-width: 450px) {
+      h1,
+      p {
+        font-size: 1.2rem;
+      }
+    }
+    @media (max-width: 400px) {
+      h1,
+      p {
+        font-size: 1rem;
+      }
+      p {
+        display: none;
+      }
     }
 
     .signOut-btn {
       padding: 0.5rem;
-      font-size: 1rem;
+      font-size: 0.8rem;
       background-color: rgba(128, 128, 128, 0.349);
       color: white;
       border: 2px solid black;
-      border-radius: 15px;
+      border-radius: 5px;
       letter-spacing: 2px;
       @include btn-hover;
     }
@@ -307,9 +325,3 @@
     }
   }
 }
-
-// @media (max-width: 700px) {
-//   .content-wrapper {
-//     height: 80vh;
-//   }
-// }

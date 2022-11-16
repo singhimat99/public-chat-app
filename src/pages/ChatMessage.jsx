@@ -22,7 +22,7 @@ export default function ChatMessage({ message, fromCurrentUser, messageId }) {
         src={photoUrl ? photoUrl : noPhotoUrl}
         alt="profile image"
         referrerPolicy="no-referrer"
-        onClick={() => fromCurrentUser && setMiniMenuOpened((prev) => !prev)}
+        onClick={() => setMiniMenuOpened((prev) => !prev)}
       />
 
       <div className="message-content">

@@ -1,21 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import SignIn from "./pages/SignIn.jsx";
 import ChatRoom from "./pages/ChatRoom";
 import SignUp from "./pages/SignUp.jsx";
 import DisplayName from "./pages/DisplayName.jsx";
 import PrivateRoutes from "./pages/PrivateRoutes.jsx";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.scss";
 
-import { auth } from "./Firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { onAuthStateChanged } from "firebase/auth";
-import { AuthProvider, useAuth } from "./contexts/AuthContext.jsx";
+import { AuthProvider } from "./contexts/AuthContext.jsx";
 
 export default function App() {
   return (

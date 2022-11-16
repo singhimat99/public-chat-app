@@ -7,6 +7,7 @@ import {
   onSnapshot,
   getDocs,
   addDoc,
+  serverTimestamp,
 } from "firebase/firestore";
 
 import { firestore, auth } from "../Firebase";
@@ -14,31 +15,31 @@ import ChatMessage from "./ChatMessage";
 import { GrSend } from "react-icons/gr";
 import { useAuth } from "../contexts/AuthContext";
 
-export default function ChatRoom({ signOut }) {
+export default function ChatRoom() {
   const messagesRef = collection(firestore, "messages");
   const [allMessages, setAllMessages] = useState([]);
   const currentMessage = useRef("");
   const scrollTo = useRef();
   const scrollToForm = useRef();
-  const { currentUser } = useAuth();
-  console.log(allMessages);
+  const { currentUser, signOut } = useAuth();
 
   async function addNewMessage(e) {
     e.preventDefault();
     const newMessage = await addDoc(messagesRef, {
       value: currentMessage.current.value,
-      createdAt: new Date(),
+      createdAt: serverTimestamp(),
       userId: auth.currentUser.uid,
       photoUrl: auth.currentUser.photoURL,
       displayName: auth.currentUser.displayName,
     });
     currentMessage.current.value = "";
+    scrollTo.current.scrollIntoView({ behavior: "smooth" });
   }
+
   let cancelSnapshot;
   useEffect(() => {
     let messagesQuery;
 
-    scrollToForm.current.scrollIntoView({ behavior: "smooth" });
     async function queryMessages() {
       messagesQuery = query(messagesRef, orderBy("createdAt"), limit(100));
       cancelSnapshot = onSnapshot(messagesQuery, (querySnapshot) => {
@@ -49,17 +50,16 @@ export default function ChatRoom({ signOut }) {
         );
       });
     }
-    scrollTo.current.scrollIntoView({ behavior: "smooth" });
     queryMessages();
+    scrollTo.current.scrollIntoView({ behavior: "smooth" });
     return cancelSnapshot;
   }, []);
-  console.log(cancelSnapshot);
   return (
     <section className="chatRoom">
       <nav className="navbar">
-        <h1>🔥 💬</h1>
+        <p>🔥 💬</p>
         <h1>{currentUser.displayName}</h1>
-        <button onClick={() => auth.signOut()} className="signOut-btn">
+        <button onClick={signOut} className="signOut-btn">
           Sign Out
         </button>
       </nav>

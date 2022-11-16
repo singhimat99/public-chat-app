@@ -1,12 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { firestore, auth } from "../Firebase";
-import {
-  GoogleAuthProvider,
-  signInWithPopup,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { auth } from "../Firebase";
 import { useRef } from "react";
 import { useAuth } from "../contexts/AuthContext";
 
@@ -15,24 +10,33 @@ export default function SignIn() {
   const emailRef = useRef();
   const { login, anonLogin } = useAuth();
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
+  function resetInputFields() {
+    emailRef.current.value = "";
+    passwordRef.current.value = "";
+  }
   async function handleLogin(e) {
     e.preventDefault();
 
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
-
+    setError("");
     try {
       const response = await login(auth, email, password);
       const user = response.user;
       navigate("/displayname");
-    } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
+    } catch (e) {
+      const errorCode = e.code;
+      const errorMessage = e.message;
+      console.error(errorCode, errorMessage);
+      setError("Username or Password incorrect");
     }
+    resetInputFields();
   }
   async function handleAnonSignIn(e) {
     e.preventDefault();
+    setError("");
     try {
       const response = await anonLogin(auth);
       const user = response.user;
@@ -40,7 +44,9 @@ export default function SignIn() {
     } catch (error) {
       const errorCode = error.code;
       const errorMessage = error.message;
+      console.error(errorCode, errorMessage);
     }
+    resetInputFields();
   }
   return (
     <div className="signIn-page">
@@ -64,6 +70,7 @@ export default function SignIn() {
         <div className="anonSignIn">
           Sign in <button onClick={handleAnonSignIn}>Anonymously</button>
         </div>
+        {error && <p>{error}</p>}
       </div>
     </div>
   );

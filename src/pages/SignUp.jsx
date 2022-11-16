@@ -1,12 +1,7 @@
 import React from "react";
 import { useRef, useState } from "react";
 import { auth } from "../Firebase";
-import {
-  createUserWithEmailAndPassword,
-  updateProfile,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -16,9 +11,8 @@ export default function SignUp() {
   const confirmPasswordRef = useRef();
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { signup, currentUser } = useAuth();
+  const { signup } = useAuth();
   const navigate = useNavigate();
-  console.log(currentUser);
 
   function signInWithGoogle() {
     const provider = new GoogleAuthProvider();
