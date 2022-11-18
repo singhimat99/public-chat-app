@@ -5,6 +5,7 @@ import SignUp from "./pages/SignUp.jsx";
 import DisplayName from "./pages/DisplayName.jsx";
 import PrivateRoutes from "./pages/PrivateRoutes.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
+import Loading from "./pages/Loading.jsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.scss";
 

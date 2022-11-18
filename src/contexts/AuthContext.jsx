@@ -8,7 +8,7 @@ import {
   signInWithEmailAndPassword,
   sendPasswordResetEmail,
 } from "firebase/auth";
-import { auth } from "../Firebase";
+import { auth, firestore } from "../Firebase";
 
 const AuthContext = createContext();
 
