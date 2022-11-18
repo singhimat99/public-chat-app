@@ -8,7 +8,7 @@ import { useAuth } from "../contexts/AuthContext";
 export default function SignIn() {
   const passwordRef = useRef();
   const emailRef = useRef();
-  const { login, anonLogin } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
   const [error, setError] = useState("");
 
@@ -34,20 +34,7 @@ export default function SignIn() {
     }
     resetInputFields();
   }
-  async function handleAnonSignIn(e) {
-    e.preventDefault();
-    setError("");
-    try {
-      const response = await anonLogin(auth);
-      const user = response.user;
-      navigate("/displayname");
-    } catch (error) {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      console.error(errorCode, errorMessage);
-    }
-    resetInputFields();
-  }
+
   return (
     <div className="signIn-page">
       <div className="log-in-container">
@@ -66,10 +53,10 @@ export default function SignIn() {
         <div className="needs-account">
           Click here to <Link to="/signup">Sign Up</Link>
         </div>
-        <span>Or</span>
-        <div className="anonSignIn">
-          Sign in <button onClick={handleAnonSignIn}>Anonymously</button>
-        </div>
+
+        <Link className="forgot-pass" to="/forgotpassword">
+          Forgot Password?
+        </Link>
         {error && <p>{error}</p>}
       </div>
     </div>

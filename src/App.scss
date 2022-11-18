@@ -94,20 +94,6 @@
 
   .log-in-container {
     @include form-styles;
-    .anonSignIn {
-      button {
-        border: none;
-        background: none;
-        transition: all 0.3s;
-        font-family: inherit;
-        font-size: inherit;
-
-        &:hover {
-          border-bottom: 2px solid #fffffe;
-          transform: scale(1.05);
-        }
-      }
-    }
   }
 }
 
@@ -120,16 +106,21 @@
   .sign-up {
     @include form-styles;
 
-    .google-btn {
+    .alt-signin-btn {
       background: none;
       border: none;
       transition: all 0.3s;
-      margin: 1rem;
+      font-size: 1rem;
+      margin: 0.25rem;
 
       &:hover {
         border-bottom: 2px solid #fffffe;
         transform: scale(1.1);
       }
+    }
+
+    .has-account {
+      margin-top: 0.5rem;
     }
   }
 }
@@ -141,6 +132,19 @@
 
   .displayname-form-container {
     @include form-styles;
+  }
+}
+.forgotpass-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: var(--dark-highlight);
+
+  .forgotpass-form-container {
+    @include form-styles;
+    h6 {
+      color: green;
+    }
   }
 }
 // top level of chatroom

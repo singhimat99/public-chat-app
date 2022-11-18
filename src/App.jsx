@@ -4,6 +4,7 @@ import ChatRoom from "./pages/ChatRoom";
 import SignUp from "./pages/SignUp.jsx";
 import DisplayName from "./pages/DisplayName.jsx";
 import PrivateRoutes from "./pages/PrivateRoutes.jsx";
+import ForgotPassword from "./pages/ForgotPassword.jsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.scss";
 
@@ -22,6 +23,11 @@ export default function App() {
               <Route exact path="/signup" element={<SignUp />} />
               <Route exact path="/login" element={<SignIn />} />
               <Route exact path="/displayname" element={<DisplayName />} />
+              <Route
+                exact
+                path="/forgotpassword"
+                element={<ForgotPassword />}
+              />
             </Routes>
           </Router>
         </section>

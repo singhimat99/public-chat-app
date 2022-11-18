@@ -11,7 +11,7 @@ export default function SignUp() {
   const confirmPasswordRef = useRef();
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { signup } = useAuth();
+  const { signup, anonLogin } = useAuth();
   const navigate = useNavigate();
 
   function signInWithGoogle() {
@@ -54,6 +54,20 @@ export default function SignUp() {
     }
     setIsLoading(false);
   }
+  async function handleAnonSignIn(e) {
+    e.preventDefault();
+    setError("");
+    try {
+      const response = await anonLogin(auth);
+      const user = response.user;
+      navigate("/displayname");
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.error(errorCode, errorMessage);
+    }
+    resetInputFields();
+  }
   return (
     <div className="sign-up-container">
       <div className="sign-up">
@@ -76,13 +90,19 @@ export default function SignUp() {
             Create New Account
           </button>
         </form>
-        <button onClick={signInWithGoogle} className="google-btn">
+        <button onClick={signInWithGoogle} className="alt-signin-btn">
           Sign In with Google
         </button>
-        {error && <p>{error}</p>}
+        <span>Or</span>
+
+        <button onClick={handleAnonSignIn} className="alt-signin-btn">
+          Sign in Anonymously
+        </button>
+
         <div className="has-account">
           Already Have an Account? <Link to="/login">Log In</Link>
         </div>
+        {error && <p>{error}</p>}
       </div>
     </div>
   );

@@ -6,6 +6,7 @@ import {
   onAuthStateChanged,
   signInAnonymously,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth } from "../Firebase";
 
@@ -33,6 +34,9 @@ export function AuthProvider({ children }) {
     auth.signOut();
     isAnon && deleteUser(currentUser);
   }
+  function forgotPassword(auth, email) {
+    return sendPasswordResetEmail(auth, email);
+  }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -52,6 +56,7 @@ export function AuthProvider({ children }) {
     login,
     anonLogin,
     signOut,
+    forgotPassword,
   };
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
