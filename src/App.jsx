@@ -1,8 +1,8 @@
 import React, { lazy, Suspense } from "react";
-import SignIn from "./pages/SignIn.jsx";
 const ChatRoom = lazy(() => import("./pages/ChatRoom"));
 const DisplayName = lazy(() => import("./pages/DisplayName.jsx"));
-import SignUp from "./pages/SignUp.jsx";
+const SignUp = lazy(() => import("./pages/SignUp.jsx"));
+const SignIn = lazy(() => import("./pages/SignIn.jsx"));
 import PrivateRoutes from "./pages/PrivateRoutes.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import Loading from "./pages/Loading.jsx";

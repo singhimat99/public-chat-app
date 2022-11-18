@@ -21,11 +21,13 @@
   align-items: center;
 }
 @mixin btn-hover {
-  transition: transform 0.3s;
-  &:hover {
-    background-color: var(--main-highlight);
-    transform: scale(1.05);
-    color: white;
+  @media (hover: hover) {
+    transition: transform 0.3s;
+    &:hover {
+      background-color: var(--main-highlight);
+      transform: scale(1.05);
+      color: white;
+    }
   }
 }
 
@@ -340,16 +342,13 @@
     .message-form-sbmt-btn {
       // padding: 0.5rem;
       @include center-flex;
-      background-color: white;
+      background-color: black;
       border: none;
       font-size: 1.3rem;
-      width: 10%;
+      width: 12%;
       aspect-ratio: 1;
       border-radius: 50%;
       @include btn-hover;
-      .send-icon {
-        color: white;
-      }
     }
   }
 }

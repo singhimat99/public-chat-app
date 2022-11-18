@@ -9,6 +9,7 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth, firestore } from "../Firebase";
+import Loading from "../pages/Loading";
 
 const AuthContext = createContext();
 
@@ -19,7 +20,8 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [pending, setPending] = useState(true);
-
+  if (currentUser) {
+  }
   function signup(auth, email, password) {
     return createUserWithEmailAndPassword(auth, email, password);
   }
@@ -47,7 +49,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   if (pending) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   const value = {

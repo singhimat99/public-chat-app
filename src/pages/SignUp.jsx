@@ -14,6 +14,11 @@ export default function SignUp() {
   const { signup, anonLogin } = useAuth();
   const navigate = useNavigate();
 
+  function resetInputFields() {
+    emailRef.current.value = "";
+    passwordRef.current.value = "";
+    confirmPasswordRef.current.value = "";
+  }
   function signInWithGoogle() {
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider)
@@ -54,6 +59,7 @@ export default function SignUp() {
     }
     setIsLoading(false);
   }
+
   async function handleAnonSignIn(e) {
     e.preventDefault();
     setError("");

@@ -5,14 +5,13 @@ import {
   orderBy,
   limit,
   onSnapshot,
-  getDocs,
   addDoc,
   serverTimestamp,
 } from "firebase/firestore";
 
 import { firestore, auth } from "../Firebase";
 import ChatMessage from "./ChatMessage";
-import { GrSend } from "react-icons/gr";
+import { FiSend } from "react-icons/fi";
 import { useAuth } from "../contexts/AuthContext";
 
 export default function ChatRoom() {
@@ -91,7 +90,7 @@ export default function ChatRoom() {
           placeholder="Type Here..."
         />
         <button type="submit" className="message-form-sbmt-btn">
-          <GrSend className="send-icon" />
+          <FiSend color="white" />
         </button>
       </form>
     </section>

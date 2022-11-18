@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { doc, deleteDoc } from "firebase/firestore";
-import { useAuth } from "../contexts/AuthContext";
-import { firestore, auth } from "../Firebase";
+import { firestore } from "../Firebase";
 import noPhotoUrl from "../images/no-profile-pic.jpg";
-import { getAdditionalUserInfo } from "firebase/auth";
-import { GrHtml5 } from "react-icons/gr";
 
 export default function ChatMessage({ message, fromCurrentUser, messageId }) {
   const { value, photoUrl, displayName } = message;
@@ -22,7 +19,7 @@ export default function ChatMessage({ message, fromCurrentUser, messageId }) {
         src={photoUrl ? photoUrl : noPhotoUrl}
         alt="profile image"
         referrerPolicy="no-referrer"
-        onClick={() => setMiniMenuOpened((prev) => !prev)}
+        onClick={() => fromCurrentUser && setMiniMenuOpened((prev) => !prev)}
       />
 
       <div className="message-content">
